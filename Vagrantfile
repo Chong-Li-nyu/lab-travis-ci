@@ -37,9 +37,13 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "prescript", type: "shell" do |s|
-    s.inline =  "apt-get install -y ipython"
-  end
+
+  config.vm.provision "prescript", type: "shell", inline: <<-SHELL
+
+  apt install -y ipython
+  apt install -y redis-tools
+  SHELL
+    
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     apt-get install -y git python-pip python-dev
